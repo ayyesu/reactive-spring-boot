@@ -26,12 +26,17 @@ public class ReactiveTutorial {
         return flux.map(data -> data.toUpperCase(Locale.ROOT));
     }
 
+    private Flux<String> testFlatMap(){
+        Flux<String> flux = Flux.just("Java", "Tutorial", "Reactive", "Programming");
+        return flux.flatMap(data -> Mono.just(data.toUpperCase(Locale.ROOT)));
+    }
+
     public static void main(String[] args) {
         ReactiveTutorial reactiveTutorial = new ReactiveTutorial();
 //        reactiveTutorial.testMono()
 //                .subscribe(data -> System.out.println(data));
 
-        reactiveTutorial.testMap()
+        reactiveTutorial.testFlatMap()
                 .subscribe(System.out::println);
     }
 }
