@@ -5,6 +5,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ReactiveTutorial {
 
@@ -20,12 +21,22 @@ public class ReactiveTutorial {
         // return Flux.just("Java", "Tutorial", "Reactive", "Programming");
     }
 
+    private Flux<String> testMap(){
+        Flux<String> flux = Flux.just("Java", "Tutorial", "Reactive", "Programming");
+        return flux.map(data -> data.toUpperCase(Locale.ROOT));
+    }
+
+    private Flux<String> testFlatMap(){
+        Flux<String> flux = Flux.just("Java", "Tutorial", "Reactive", "Programming");
+        return flux.flatMap(data -> Mono.just(data.toUpperCase(Locale.ROOT)));
+    }
+
     public static void main(String[] args) {
         ReactiveTutorial reactiveTutorial = new ReactiveTutorial();
 //        reactiveTutorial.testMono()
 //                .subscribe(data -> System.out.println(data));
 
-        reactiveTutorial.testFlux()
+        reactiveTutorial.testFlatMap()
                 .subscribe(System.out::println);
     }
 }
