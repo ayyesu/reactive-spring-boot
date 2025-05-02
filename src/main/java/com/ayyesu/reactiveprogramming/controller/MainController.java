@@ -1,4 +1,4 @@
-package com.ayyesu.reactiveprogramming;
+package com.ayyesu.reactiveprogramming.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
