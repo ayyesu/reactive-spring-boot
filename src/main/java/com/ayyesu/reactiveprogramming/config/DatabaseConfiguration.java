@@ -1,4 +1,4 @@
-package com.ayyesu.reactiveprogramming;
+package com.ayyesu.reactiveprogramming.config;
 
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
