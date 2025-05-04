@@ -1,0 +1,19 @@
+package com.ayyesu.reactiveprogramming.config;
+
+import org.springframework.boot.autoconfigure.web.WebProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ExceptionConfig {
+
+    @Bean
+    public WebProperties.Resources resources(){
+        return new WebProperties().getResources();
+    }
+
+    @Bean
+    public WebProperties webProperties(){
+        return new WebProperties();
+    }
+}
