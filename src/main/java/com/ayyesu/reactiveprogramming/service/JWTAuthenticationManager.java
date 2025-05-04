@@ -40,6 +40,7 @@ public class JWTAuthenticationManager implements ReactiveAuthenticationManager {
             @Override
             public Mono<Authentication> convert(ServerWebExchange exchange) {
                 String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+                System.out.println("token " + token);
                 if (token != null && token.startsWith("Bearer ")){
                     token = token.substring(7);
                     return Mono.just(SecurityContextHolder.getContext().getAuthentication());

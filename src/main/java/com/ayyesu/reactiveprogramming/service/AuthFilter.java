@@ -12,10 +12,17 @@ import reactor.core.publisher.Mono;
 public class AuthFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        String path = exchange.getRequest().getURI().getPath();
 
+        // 👇 Allow unauthenticated access to log in and register endpoints
+        if (path.equals("/login") || path.equals("signup")){
+            return chain.filter(exchange); // ✅ Allow through
+        }
+        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        System.out.println(token);
         if (token == null || !token.startsWith("Bearer ")){
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            System.out.println("Interceptor rejected the request");
             return exchange.getResponse().setComplete(); // ❌ Don't go to the controller
         }
         return chain.filter(exchange); // ✅ Allow through
